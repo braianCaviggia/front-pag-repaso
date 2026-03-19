@@ -1,0 +1,88 @@
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.contenedor-perfil {
+  display: flex;
+  flex-direction: column;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  width: 900px;
+  height: 500px;
+  overflow: hidden;
+}
+
+.portada-perfil {
+  height: 50%;
+  width: 100%;
+}
+
+.contenedor-foto-perfil {
+  position: relative;
+  top: -75px;
+  left: 10px;
+}
+
+.foto-perfil {
+  width: 150px;
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 0px 2px 5px 0px rgb(71, 71, 71);
+}
+
+.contenedor-fotoPerfil-botones {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.contenedor-nombre-banda {
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
+  margin-left: 10px;
+}
+
+.contenedor-datos-banda {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  gap: 20px;
+  padding: 0px;
+  margin-top: 0px;
+}
+
+.contenedor-datos-banda li {
+  color: rgb(27, 27, 27);
+}
+
+h1 {
+  font-size: 30px;
+}
+
+.contenedor-botones button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #cccccc;
+  color: rgb(0, 0, 0);
+  box-shadow: 0px 1px 1px 0px rgb(71, 71, 71);
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+.contenedor-botones button:hover {
+  background-color: #9e9e9e;
+}
+
+.contenedor-botones button:first-child {
+  background-color: #007bff;
+  color: white;
+}
+
+.contenedor-botones button:first-child:hover {
+  background-color: #3c97f8;
+}
