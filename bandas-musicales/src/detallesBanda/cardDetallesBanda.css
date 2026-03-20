@@ -1,0 +1,21 @@
+.info-banda {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(145, 145, 145);
+  font-size: 15px;
+}
+
+.info-banda p:nth-child(2) {
+  font-weight: bold;
+}
+
+.contenedor-card-detalles {
+  box-shadow: 0px 2px 5px 0px rgb(163, 163, 163);
+  width: 320px;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: start;
+  font-size: 13px;
+}

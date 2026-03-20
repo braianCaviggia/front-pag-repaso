@@ -1,11 +1,11 @@
 import "./cardPerfil.css";
 
-export const CardPerfil = () => {
+export const CardPerfil = (portada:string, perfil:string, nombre:string, pais:string, fecha:string, integrantes:string, genero:string) => {
   return (
     <>
       <div className="contenedor-perfil">
         <img
-          src="https://media.ambito.com/p/0984c7c9cd61e0411977cc0993d41bae/adjuntos/239/imagenes/038/821/0038821983/soda-stereojpg.jpg"
+          src={portada}
           alt=""
           className="portada-perfil"
         />
@@ -13,7 +13,7 @@ export const CardPerfil = () => {
         <div className="contenedor-fotoPerfil-botones">
           <div className="contenedor-foto-perfil">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7xsnDyJgYCFIv44UY6GKQnR9Fxf1N4y5K5Q&s"
+              src={perfil}
               alt=""
               className="foto-perfil"
             />
@@ -27,12 +27,12 @@ export const CardPerfil = () => {
         </div>
 
         <div className="contenedor-nombre-banda">
-          <h1 className="nombre-banda">Soda Stereo</h1>
+          <h1 className="nombre-banda">{nombre}</h1>
           <ul className="contenedor-datos-banda">
-            <li className="pais-banda">📌Argentina</li>
-            <li className="fecha-banda">📅Formado en 1982</li>
-            <li className="integrantes-banda">👤3 Integrantes</li>
-            <li className="genero-banda">🎵Rock</li>
+            <li className="pais-banda">📌{pais}</li>
+            <li className="fecha-banda">📅Formado en {fecha}</li>
+            <li className="integrantes-banda">👤{integrantes} Integrantes</li>
+            <li className="genero-banda">🎵{genero}</li>
           </ul>
         </div>
       </div>
