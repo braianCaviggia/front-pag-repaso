@@ -1,3 +1,4 @@
+import { CardBiografia } from "./biografiaBanda/CardBiografia";
 import { CardDetallesBanda } from "./detallesBanda/CardDetallesBanda";
 import { CardGaleria } from "./detallesBanda/CardGaleria";
 import { CardPerfil } from "./perfiBanda/CardPerfil";
@@ -18,6 +19,8 @@ function App() {
             "3",
             "Rock",
           )}
+
+          {CardBiografia("Soda Stereo fue una banda de rock argentina considerada por la crítica como la más importante e influyente de Iberoamérica de todos los tiempos.\nEste potente trío, compuesto por Gustavo Cerati (voz y guitarra), Héctor \"Zeta\" Bosio (bajo y coros), y el baterista Charly Alberti, alcanzó el éxito internacional durante las décadas de 1980 y 1990. La banda es ampliamente considerada precursora del movimiento latinoamericano/iberoamericano/rock en español que surgió a mediados de la década de 1980.\nEl sonido inicial de Soda estuvo influenciado por bandas de new wave como Virus, The Police, Elvis Costello y bandas de post-punk como Television.\nLa banda evolucionó gradualmente hacia una banda de rock alternativo con un sonido más pesado, con influencias del rock clásico, el rock progresivo, el shoegaze, la neopsicodelia, el britpop y la música electrónica.")}
         </div>
 
         <div className="card-derecha">
