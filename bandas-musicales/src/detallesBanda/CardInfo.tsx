@@ -1,12 +1,15 @@
-import "./cardDetallesBanda.css"
+import "./cardDetallesBanda.css";
 
-export const CardInfo = (tipoInfo:string, info:string |number) => {
+interface CardInfoProps {
+  tipoInfo: string;
+  info: string | number;
+}
+
+export const CardInfo = ({ tipoInfo, info }: CardInfoProps) => {
   return (
-    <>
-      <div className="info-banda">
-        <p>{tipoInfo}</p>
-        <p>{info}</p>
-      </div>
-    </>
+    <div className="info-banda">
+      <p>{tipoInfo}</p>
+      <p>{info}</p>
+    </div>
   );
 };

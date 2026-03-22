@@ -1,46 +1,110 @@
+import { useState } from "react";
 import { CardBiografia } from "./biografiaBanda/CardBiografia";
 import { CardDetallesBanda } from "./detallesBanda/CardDetallesBanda";
 import { CardGaleria } from "./detallesBanda/CardGaleria";
 import { CardPerfil } from "./perfiBanda/CardPerfil";
+import { Buscador } from "./buscador/Buscador";
+
+interface Banda {
+  strArtist: string;
+  strCountry: string;
+  intFormedYear: string;
+  strGenre: string;
+  strStyle: string;
+  strMood: string;
+  strLabel: string;
+  intMembers: string;
+  strBiographyES: string;
+  strBiographyEN: string;
+  strArtistFanart: string;
+  strArtistFanart2: string;
+  strArtistFanart3: string;
+  strArtistThumb: string;
+}
 
 function App() {
+  const [banda, setBanda] = useState<Banda | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleBuscar = async (query: string) => {
+    setLoading(true);
+    setError(null);
+    setBanda(null);
+
+    try {
+      const res = await fetch(
+        `https://www.theaudiodb.com/api/v1/json/2/search.php?s=${encodeURIComponent(query)}`
+      );
+      const data = await res.json();
+
+      if (data.artists && data.artists.length > 0) {
+        setBanda(data.artists[0]);
+      } else {
+        setError(`No se encontró ninguna banda con el nombre "${query}"`);
+      }
+    } catch {
+      setError("Hubo un error al buscar. Intentá de nuevo.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const imagenes = banda
+    ? [banda.strArtistThumb, banda.strArtistFanart, banda.strArtistFanart2, banda.strArtistFanart3].filter(Boolean) as string[]
+    : [];
+
   return (
     <div className="App">
 
-      <header className="header">//Aca va el buscador</header>
+      <header className="header">
+        <Buscador onBuscar={handleBuscar} />
+      </header>
 
       <main className="main">
-        <div className="card-izquierda">
-          {CardPerfil(
-            "https://media.ambito.com/p/0984c7c9cd61e0411977cc0993d41bae/adjuntos/239/imagenes/038/821/0038821983/soda-stereojpg.jpg",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7xsnDyJgYCFIv44UY6GKQnR9Fxf1N4y5K5Q&s",
-            "Soda Stereo",
-            "Argentina",
-            "1983",
-            "3",
-            "Rock",
-          )}
 
-          {CardBiografia("Soda Stereo fue una banda de rock argentina considerada por la crítica como la más importante e influyente de Iberoamérica de todos los tiempos.\nEste potente trío, compuesto por Gustavo Cerati (voz y guitarra), Héctor \"Zeta\" Bosio (bajo y coros), y el baterista Charly Alberti, alcanzó el éxito internacional durante las décadas de 1980 y 1990. La banda es ampliamente considerada precursora del movimiento latinoamericano/iberoamericano/rock en español que surgió a mediados de la década de 1980.\nEl sonido inicial de Soda estuvo influenciado por bandas de new wave como Virus, The Police, Elvis Costello y bandas de post-punk como Television.\nLa banda evolucionó gradualmente hacia una banda de rock alternativo con un sonido más pesado, con influencias del rock clásico, el rock progresivo, el shoegaze, la neopsicodelia, el britpop y la música electrónica.")}
-        </div>
+        {loading && <p>Buscando...</p>}
 
-        <div className="card-derecha">
-          {CardDetallesBanda(
-            "Argentina",
-            "1983",
-            "Rock",
-            "Experimental",
-            "Energético",
-            "Sony Music",
-            "3",
-          )}
+        {error && <p style={{ color: "red" }}>{error}</p>}
 
-          {CardGaleria([
-            "https://r2.theaudiodb.com/images/media/artist/thumb/soda-stereo-4fcd8a48713e7.JPG",
-            "https://r2.theaudiodb.com/images/media/artist/fanart/soda-stereo-4fcd8a159c128.jpg",
-            "https://r2.theaudiodb.com/images/media/artist/fanart/soda-stereo-4fcd8a305b322.jpg",
-          ])}
-        </div>
+        {banda && (
+          <>
+            <div className="card-izquierda">
+              <CardPerfil
+                portada={banda.strArtistFanart ?? banda.strArtistThumb}
+                perfil={banda.strArtistThumb}
+                nombre={banda.strArtist}
+                pais={banda.strCountry}
+                fecha={banda.intFormedYear}
+                integrantes={banda.intMembers}
+                genero={banda.strGenre}
+              />
+              <CardBiografia
+                biografia={banda.strBiographyES ?? banda.strBiographyEN ?? "Sin biografía disponible."}
+              />
+            </div>
+
+            <div className="card-derecha">
+              <CardDetallesBanda
+                origen={banda.strCountry}
+                formacion={banda.intFormedYear}
+                genero={banda.strGenre}
+                estilo={banda.strStyle}
+                mood={banda.strMood}
+                sello={banda.strLabel}
+                integrantes={banda.intMembers}
+              />
+              {imagenes.length > 0 && <CardGaleria imagenes={imagenes} />}
+            </div>
+          </>
+        )}
+
+        {!loading && !error && !banda && (
+          <p style={{ color: "#aaaaaa", margin: "40px auto" }}>
+            Buscá una banda para ver su información.
+          </p>
+        )}
+
       </main>
     </div>
   );
