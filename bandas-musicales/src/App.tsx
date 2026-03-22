@@ -6,6 +6,7 @@ import { CardPerfil } from "./perfiBanda/CardPerfil";
 function App() {
   return (
     <div className="App">
+
       <header className="header">//Aca va el buscador</header>
 
       <main className="main">
